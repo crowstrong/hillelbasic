@@ -57,9 +57,14 @@ class Cargo:
             raise TypeError('Value must be float or used operand from Cargo class.')
         return self.cargo_height == trailer_height
 
+    @classmethod
+    def get_trailer_value(cls, arg):  # Зафиксировали параметры прицепа, через @classmethod
+        trailer_length, trailer_width, trailer_height = arg
+        return cls(trailer_length, trailer_width, trailer_height)
 
 if __name__ == '__main__':
-    trailer: Cargo = Cargo(13.6, 2.5, 2.6)  # Размеры прицепа
+    trailer_data: list = [13.6, 2.5, 2.6]
+    trailer: Cargo = Cargo.get_trailer_value(trailer_data)  # Размеры прицепа
     goods: Cargo = Cargo(13.2, 2.2, 2.3)  # Размеры груза
     # Варианты сравнения
     print(goods < trailer)  # True
